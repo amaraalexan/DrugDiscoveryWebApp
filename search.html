@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Final</title>
+    <meta charset="utf-8">
+    <!--[if IE]>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script type="text/javascript" src="js/search.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/search.css">
+</head>
+
+<body id="main">
+    <h1> Final Project - Drug Discovery </h1>
+    <form name="diseasesearch" id="diseasesearch" action="./ffinal_project.cgi" autocomplete = "off">
+            <h3> Search Disease Name </h3>
+            <input name="diseaseentry" id="diseaseentry" type="search" autofocus = "autofocus" placeholder="i.e Sepsis">
+            <input type="submit" id="submit" name="submit" value="submit">   
+    </form>
+    <section class= 'results' id='results'>
+        <p>
+            <span id='match_count'>0</span> match(es) found.
+        </p>
+        <table>
+            <thead>
+                <tr>
+                    <td>Biomarker/Target ID</td>
+                    <td>Name/Phase</td>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- this will be filled in by javascript when there are results -->
+            </tbody>
+        </table>
+      <i> Target and Biomarker Data can be found at the <a href="http://idrblab.net/ttd/">Therapeautic Target Database</a>.
+          <br> <br> Y. Zhou, Y. T. Zhang, X. C. Lian, ..., F. Zhu, Y. Q. Qiu & Y. Z. Chen. 
+               Therapeutic target database update 2022: facilitating drug discovery with enriched comparative data of targeted agents. 
+               Nucleic Acids Research. 50(D1): 1398-1407 (2022). PMID: 34718717</i>
+    </section>
+  <script type="text/javascript" src="js/searchfp.js"></script>
+    <script type="text/javascript">
+        var diseases = [
+            "Smallpox",
+            "Amyotrophic lateral sclerosis",
+            "Myasthenia gravis",
+            "Cardiovascular disease",
+            "Coronary artery disease",
+            "Asthma",
+            "Psoriasis vulgaris",
+            "Rheumatoid arthritis",
+            "Psoriatic arthritis",
+            "Inflammation",
+            "Chronic HCV-1 infection",
+            "Pre-eclampsia",
+            "Bronchopulmonary dysplasia",
+            "Persistent pulmonary hypertension of the newborn",
+            "Patent ductus arteriosus",
+            "Asphyxia",
+            "Hypoxia",
+            "Acute lung injury",
+            "Kidney injury",
+            "Graft rejection",
+            "Kidney transplant rejection",
+            "Hemodialysis",
+            "Salmonella infection",
+            "Syphilis",
+            "Condyloma",
+            "Tuberculosis",
+            "Toxic shock syndrome",
+            "Pertussis",
+            "HIV infection",
+            "Dengue",
+            "West nile virus infection",
+            "Cytomegaloviral Disease",
+            "Influenza",
+            "Hepatitis B",
+            "Hepatitis C",
+            "Zoster",
+            "Measles",
+            "Aspergillosis",
+            "Candidosis",
+            "Malaria",
+            "Chagas disease",
+            "Leishmaniasis",
+            "Visceral leishmaniasis",
+            "Toxoplasmosis",
+            "Onchocerciasis",
+            "Schistosomiasis",
+            "Sepsis",
+            "Advanced cancer",
+            "Solid tumour/cancer",
+            "Chronic myelogenous leukaemia",
+            "Chronic myeloid leukaemia",
+            "Acute promyelocytic leukaemia",
+            "Advanced stage follicular lymphoma",
+            "Colon cancer",
+            "Colorectal cancer",
+            "Pancreatic cancer",
+            "Hepatocellular carcinoma",
+            "Lung cancer",
+            "Non-small-cell lung cancer",
+            "Melanoma",
+            "Breast cancer",
+            "Ovarian cancer",
+            "Advanced seminoma",
+            "Non-seminoma testicular cancer",
+            "Testicular cancer",
+            "Metastatic prostate carcinoma",
+            "Metastatic renal cancer",
+            "Iron-deficiency anemia",
+            "Anemia",
+            "Systemic lupus erythematosus",
+            "Systemic sclerosis",
+            "Sjogren syndrome",
+            "Ocular allergy",
+            "Eosinophilic disorders",
+            "Acute graft versus host disease",
+            "Graft-versus-host disease",
+            "Mucopolysaccharidosis",
+            "Schizophrenia",
+            "Cognitive impairment",
+            "Dementia",
+            "Obstructive sleep apnea",
+            "Parkinson disease",
+            "Huntington disease",
+            "Alzheimer disease",
+            "Frontotemporal lobar degeneration",
+            "Multiple sclerosis",
+            "Neuromyelitis optica",
+            "Subarachnoid hemorrhage",
+            "Myalgic encephalomyelitis",
+            "Glaucoma/ocular hypertension",
+            "Dry eye disease",
+            "Hypertension",
+            "Critically cardiac disease",
+            "Acute coronary syndrome",
+            "Acute myocardial infarction",
+            "Myocardial infarction",
+            "Pulmonary embolism",
+            "Chronic thromboembolic pulmonary hypertension",
+            "Pulmonary arterial hypertension",
+            "Pulmonary hypertension",
+            "Calcific aortic valve stenosis",
+            "Acute heart failure",
+            "Chronic heart failure",
+            "Congestive heart failure",
+            "Heart failure",
+            "Nonischemic congestive heart failure",
+            "Arteriosclerosis",
+            "Atherosclerosis",
+            "Premature atherosclerosis",
+            "Peripheral arterial disease",
+            "Carotid artery atherosclerosis",
+            "Deep vein thrombosis",
+            "Venous thromboembolism",
+            "Lower respiratory tract infection",
+            "Emphysema",
+            "Chronic obstructive pulmonary disease",
+            "Cystic fibrosis",
+            "Community-acquired pneumonia",
+            "Fibrosing alveolitis",
+            "Idiopathic pulmonary fibrosis",
+            "Pulmonary fibrosis",
+            "Dental caries",
+            "Eosinophilic esophagitis",
+            "Coeliac disease",
+            "Non-alcoholic steatohepatitis",
+            "Crohn disease",
+            "Ulcerative colitis",
+            "Inflammatory bowel disease",
+            "Osteoarthritis",
+            "Knee osteoarthritis",
+            "Postmenopausal osteoporosis",
+            "Membranous nephropathy",
+            "Acute kidney injury",
+            "Chronic kidney disease",
+            "Diabetic nephropathy",
+            "Autosomal dominant polycystic kidney disease",
+            "Nephropathy",
+            "Overactive bladder",
+            "Rheumatic fever",
+            "Diphtheria",
+            "Cardiac disease",
+            "Chronic lung disease",
+            "African trypanosomiasis",
+            "Renal dysfunction",
+            "HBV infection-related hepatocellular carcinoma",
+            "Invasive breast cancer",
+            "Acute myeloid leukaemia",
+            "Severe asthma",
+            "Irresectable biliary tract cancer",
+            "Chronic hypertension",
+            "Metastatic colorectal cancer",
+            "Stress",
+            "Ischemia",
+            "Steatohepatitis",
+            "B-cell non-hodgkin lymphoma",
+            "Primary ciliary dyskinesia",
+            "Elderly acute myeloid leukaemia",
+            "Node-positive breast cancer",
+            "Gastrointestinal stromal tumour",
+            "Endocrine responsive early breast cancer",
+            "Glottic cancer",
+            "Prostate cancer",
+            "Medulloblastoma",
+            "Renal cell carcinoma",
+            "Ewing sarcoma",
+            "Critical illness",
+            "Focal segmental glomerulonephritis",
+        ];
+        autocomplete(document.getElementById("diseaseentry"), diseases);
+    </script>
+</body>
+</html>
