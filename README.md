@@ -1,6 +1,6 @@
 # Drug Discovery Web Application
-
-This was made for my final project in Advanced Computer Concepts. This data-mining tool will allow users to search a disease name and receive the targets, biomarkers, and current drugs associated with that disease. 
+ 
+ This data-mining tool will allow users to search a disease name and receive the targets, biomarkers, and current drugs associated with that disease. 
 
 ## Table of Contents 
 * Installation Requirements 
